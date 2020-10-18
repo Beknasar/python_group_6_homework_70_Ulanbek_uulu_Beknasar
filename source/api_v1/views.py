@@ -55,11 +55,12 @@ class ArticleUpdateView(View):
             return response
 
 
-# class ArticleDeleteView(View):
-#     def get(self, request, *args, **kwargs):
-#         data = Article.objects.get(pk=kwargs['pk'])
-#         slr = ArticleSerializer(data, many=False)
-#         # pk = data['pk']
-#         data.delete()
-#
-#         return JsonResponse(slr.data, safe=False)
+class ArticleDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        data = Article.objects.get(pk=kwargs['pk'])
+        slr = ArticleSerializer(data, many=False)
+        id = slr.data['id']
+        # pk = data['pk']
+        data.delete()
+
+        return HttpResponse(id)
